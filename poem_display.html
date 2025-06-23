@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Poem Display</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <style>
+  body {
+    font-family: sans-serif;
+    margin: 0;
+    background: #f4f4f4;
+  }
+
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+  }
+
+  .left-column {
+    flex: 1;
+    min-width: 300px;
+    max-width: 35%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .right-column {
+    flex: 2;
+    min-width: 300px;
+  }
+
+  .section {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+
+  embed, iframe, audio {
+    width: 100%;
+    border: none;
+  }
+
+  #poem-pdf {
+    height: 500px;
+  }
+
+  iframe {
+    height: 250px;
+  }
+
+  @media (max-width: 768px) {
+    .container {
+      flex-direction: column;
+      padding: 10px;
+    }
+
+    .left-column, .right-column {
+      max-width: 100%;
+    }
+
+    #poem-pdf {
+      height: 60vh;
+    }
+  }
+</style>
+
+  <div class="container">
+  <!-- Column 1: Left -->
+  <div class="left-column section">
+    <h2>Poem (Video)</h2>
+    <iframe id="poem-video" src="" allowfullscreen></iframe>
+
+    <h2>Poem (Audio)</h2>
+    <audio id="poem-audio" controls>
+      <source id="poem-audio-src" src="" type="audio/mpeg" />
+      Your browser does not support the audio element.
+    </audio>
+  </div>
+
+  <!-- Column 2: Right -->
+  <div class="right-column section">
+    <h2>Poem (Text)</h2>
+    <iframe id="poem-pdf" src="" style="width:100%;" frameborder="0"></iframe>
+    <p><a id="poem-pdf-link" href="" target="_blank">Open PDF in New Tab</a></p>
+  </div>
+</div>
+
+  <script>
+    const contentMap = {
+      class1: {
+        kannada: {
+          poem1: {
+            pdf: "https://docs.google.com/gview?url=https://raw.githubusercontent.com/S-NR/StudentsGuide/main/poem_text/Class1_Kannada_Poem1.pdf&embedded=true",
+            video: "https://www.youtube.com/embed/VIDEO_ID_1",
+            audio: "Class1_Kannada_Poem1.mp3"
+          },
+          poem2: {
+            pdf: "https://docs.google.com/gview?url=https://raw.githubusercontent.com/S-NR/StudentsGuide/main/poem_text/Class1_Kannada_Poem2.pdf&embedded=true",
+            video: "https://www.youtube.com/embed/VIDEO_ID_2",
+            audio: "Class1_Kannada_Poem2.mp3"
+          },
+          poem3: {
+            pdf: "https://docs.google.com/gview?url=https://raw.githubusercontent.com/S-NR/StudentsGuide/main/poem_text/Class1_Kannada_Poem3.pdf&embedded=true",
+            video: "https://www.youtube.com/embed/VIDEO_ID_3",
+            audio: "Class1_Kannada_Poem3.mp3"
+          },
+          poem4: {
+            pdf: "https://docs.google.com/gview?url=https://raw.githubusercontent.com/S-NR/StudentsGuide/main/poem_text/Class1_Kannada_Poem4.pdf&embedded=true",
+            video: "https://www.youtube.com/embed/VIDEO_ID_4",
+            audio: "Class1_Kannada_Poem4.mp3"
+          },
+          poem5: {
+            pdf: "https://docs.google.com/gview?url=https://raw.githubusercontent.com/S-NR/StudentsGuide/main/poem_text/Class1_Kannada_Poem5.pdf&embedded=true",
+            video: "https://www.youtube.com/embed/VIDEO_ID_5",
+            audio: "Class1_Kannada_Poem5.mp3"
+          }
+        }
+      },
+     class5: {
+        kannada: {
+          poem1: {
+            pdf: "https://docs.google.com/gview?url=https://raw.githubusercontent.com/S-NR/StudentsGuide/main/poem_text/Class5_Kannada_Poem1.pdf&embedded=true",
+            video: "https://www.youtube.com/embed/dA1vKgCF-ng",
+            audio: "poem_audio/Class1_Kannada_Poem1.mp3" 
+          },
+          poem2: {
+            pdf: "https://docs.google.com/gview?url=https://raw.githubusercontent.com/S-NR/StudentsGuide/main/poem_text/Class5_Kannada_Poem2.pdf&embedded=true",
+            video: "https://www.youtube.com/embed/z-3qmeczqz0",
+            audio: "poem_audio/Class1_Kannada_Poem1.mp3"
+          },
+          poem3: {
+            pdf: "https://docs.google.com/gview?url=https://raw.githubusercontent.com/S-NR/StudentsGuide/main/poem_text/Class5_Kannada_Poem3.pdf&embedded=true",
+            video: "https://www.youtube.com/embed/YD6SBgGksGo",
+            audio: "poem_audio/Class1_Kannada_Poem1.mp3" 
+          },
+          poem4: {
+            pdf: "https://docs.google.com/gview?url=https://raw.githubusercontent.com/S-NR/StudentsGuide/main/poem_text/Class5_Kannada_Poem4.pdf&embedded=true",
+            video: "https://www.youtube.com/embed/YD6SBgGksGo",
+            audio: "poem_audio/Class1_Kannada_Poem1.mp3" 
+          },
+          poem5: {
+            pdf: "https://docs.google.com/gview?url=https://raw.githubusercontent.com/S-NR/StudentsGuide/main/poem_text/Class5_Kannada_Poem5.pdf&embedded=true",
+            video: "https://www.youtube.com/embed/fJC-Rgj7wvc",
+            audio: "poem_audio/Class1_Kannada_Poem1.mp3" 
+          },
+          poem6: {
+            pdf: "https://docs.google.com/gview?url=https://raw.githubusercontent.com/S-NR/StudentsGuide/main/poem_text/Class5_Kannada_Poem6.pdf&embedded=true",
+            video: "https://www.youtube.com/embed/I9GycJgh8Ik",
+            audio: "poem_audio/Class1_Kannada_Poem1.mp3"
+          },
+          poem7: {
+            pdf: "https://docs.google.com/gview?url=https://raw.githubusercontent.com/S-NR/StudentsGuide/main/poem_text/Class5_Kannada_Poem7.pdf&embedded=true",
+            video: "https://www.youtube.com/embed/b93YscNCThE",
+            audio: "poem_audio/Class1_Kannada_Poem1.mp3"
+          },
+          poem8: {
+            pdf: "https://docs.google.com/gview?url=https://raw.githubusercontent.com/S-NR/StudentsGuide/main/poem_text/Class5_Kannada_Poem8.pdf&embedded=true",
+            video: "https://www.youtube.com/embed/6hnhnXyYnyc",
+            audio: "poem_audio/Class1_Kannada_Poem1.mp3"
+          }
+        },
+       kannada_SL: {
+          poem1: {
+            pdf: "https://docs.google.com/gview?url=https://raw.githubusercontent.com/S-NR/StudentsGuide/main/poem_text/Class5_Kannada_SL_Poem1.pdf&embedded=true",
+            video: "https://www.youtube.com/embed/xEqqrVNcEPE",
+            audio: "poem_audio/Class1_Kannada_Poem1.mp3"
+          },
+          poem2: {
+            pdf: "https://docs.google.com/gview?url=https://raw.githubusercontent.com/S-NR/StudentsGuide/main/poem_text/Class5_Kannada_SL_Poem2.pdf&embedded=true",
+            video: "https://www.youtube.com/embed/z-3qmeczqz0",
+            audio: "poem_audio/Class1_Kannada_Poem1.mp3"
+          },
+          poem3: {
+            pdf: "https://docs.google.com/gview?url=https://raw.githubusercontent.com/S-NR/StudentsGuide/main/poem_text/Class5_Kannada_SL_Poem3.pdf&embedded=true",
+            video: "https://www.youtube.com/embed/Rl8NLTEp18w",
+            audio: "poem_audio/Class1_Kannada_Poem1.mp3" 
+          },
+          poem4: {
+            pdf: "https://docs.google.com/gview?url=https://raw.githubusercontent.com/S-NR/StudentsGuide/main/poem_text/Class5_Kannada_SL_Poem4.pdf&embedded=true",
+            video: "https://www.youtube.com/embed/0bBzmDGLQYo",
+            audio: "poem_audio/Class1_Kannada_Poem1.mp3" 
+          },
+          poem5: {
+            pdf: "https://docs.google.com/gview?url=https://raw.githubusercontent.com/S-NR/StudentsGuide/main/poem_text/Class5_Kannada_SL_Poem5.pdf&embedded=true",
+            video: "https://www.youtube.com/embed/AqSBEZcJAok",
+            audio: "poem_audio/Class1_Kannada_Poem1.mp3" 
+          },
+          poem6: {
+            pdf: "https://docs.google.com/gview?url=https://raw.githubusercontent.com/S-NR/StudentsGuide/main/poem_text/Class5_Kannada_SL_Poem6.pdf&embedded=true",
+            video: "https://www.youtube.com/embed/Z0Z1Mri4gtM",
+            audio: "poem_audio/Class1_Kannada_Poem1.mp3"
+          },
+          poem7: {
+            pdf: "https://docs.google.com/gview?url=https://raw.githubusercontent.com/S-NR/StudentsGuide/main/poem_text/Class5_Kannada_SL_Poem7.pdf&embedded=true",
+            video: "https://www.youtube.com/embed/b93YscNCThE",
+            audio: "poem_audio/Class1_Kannada_Poem1.mp3"
+          },
+        }
+      },
+      class6: {
+        kannada: {
+          poem1: {
+            pdf: "https://docs.google.com/gview?url=https://raw.githubusercontent.com/S-NR/StudentsGuide/main/poem_text/Class6_Kannada_Poem1.pdf&embedded=true",
+            video: "https://www.youtube.com/embed/tCH4qAkn7IE",
+            audio: "poem_audio/Class1_Kannada_Poem1.mp3" 
+          },
+          poem2: {
+            pdf: "https://docs.google.com/gview?url=https://raw.githubusercontent.com/S-NR/StudentsGuide/main/poem_text/Class6_Kannada_Poem2.pdf&embedded=true",
+            video: "https://www.youtube.com/embed/PsUNj-Ckdmo",
+            audio: "poem_audio/Class1_Kannada_Poem1.mp3" 
+          },
+          poem3: {
+            pdf: "https://docs.google.com/gview?url=https://raw.githubusercontent.com/S-NR/StudentsGuide/main/poem_text/Class6_Kannada_Poem3.pdf&embedded=true",
+            video: "https://www.youtube.com/embed/M0yuEAWPRhw",
+            audio: "poem_audio/Class1_Kannada_Poem1.mp3" 
+          },
+          poem4: {
+            pdf: "https://docs.google.com/gview?url=https://raw.githubusercontent.com/S-NR/StudentsGuide/main/poem_text/Class6_Kannada_Poem4.pdf&embedded=true",
+            video: "https://www.youtube.com/embed/LB6aWhMMgJY",
+            audio: "poem_audio/Class1_Kannada_Poem1.mp3" 
+          },
+          poem6: {
+            pdf: "https://docs.google.com/gview?url=https://raw.githubusercontent.com/S-NR/StudentsGuide/main/poem_text/Class6_Kannada_Poem6.pdf&embedded=true",
+            video: "https://www.youtube.com/embed/Iooq1BtzSUg",
+            audio: "poem_audio/Class1_Kannada_Poem1.mp3" 
+          },
+          poem7: {
+            pdf: "https://docs.google.com/gview?url=https://raw.githubusercontent.com/S-NR/StudentsGuide/main/poem_text/Class6_Kannada_Poem7.pdf&embedded=true",
+            video: "https://www.youtube.com/embed/xrp98af0S3Y",
+            audio: "poem_audio/Class1_Kannada_Poem1.mp3" 
+          },
+          poem8: {
+            pdf: "https://docs.google.com/gview?url=https://raw.githubusercontent.com/S-NR/StudentsGuide/main/poem_text/Class6_Kannada_Poem8.pdf&embedded=true",
+            video: "https://www.youtube.com/embed/NmihOHFDZfQ",
+            audio: "poem_audio/Class1_Kannada_Poem1.mp3" 
+          }
+        },
+        kannada_SL: {
+          poem1: {
+            pdf: "https://docs.google.com/gview?url=https://raw.githubusercontent.com/S-NR/StudentsGuide/main/poem_text/Class6_Kannada_SL_Poem1.pdf&embedded=true",
+            video: "https://www.youtube.com/embed/xEqqrVNcEPE",
+            audio: "poem_audio/Class1_Kannada_Poem1.mp3"
+          },
+          poem2: {
+            pdf: "https://docs.google.com/gview?url=https://raw.githubusercontent.com/S-NR/StudentsGuide/main/poem_text/Class6_Kannada_SL_Poem2.pdf&embedded=true",
+            video: "https://www.youtube.com/embed/a2S2KFY-1tw",
+            audio: "poem_audio/Class1_Kannada_Poem1.mp3"
+          },
+          poem3: {
+            pdf: "https://docs.google.com/gview?url=https://raw.githubusercontent.com/S-NR/StudentsGuide/main/poem_text/Class6_Kannada_SL_Poem3.pdf&embedded=true",
+            video: "https://www.youtube.com/embed/YD6SBgGksGo",
+            audio: "poem_audio/Class1_Kannada_Poem1.mp3" 
+          },
+          poem4: {
+            pdf: "https://docs.google.com/gview?url=https://raw.githubusercontent.com/S-NR/StudentsGuide/main/poem_text/Class6_Kannada_SL_Poem4.pdf&embedded=true",
+            video: "https://www.youtube.com/embed/oBQ27n5Fpbc",
+            audio: "poem_audio/Class1_Kannada_Poem1.mp3" 
+          },
+          poem5: {
+            pdf: "https://docs.google.com/gview?url=https://raw.githubusercontent.com/S-NR/StudentsGuide/main/poem_text/Class6_Kannada_SL_Poem5.pdf&embedded=true",
+            video: "https://www.youtube.com/embed/tXut_rreFv8",
+            audio: "poem_audio/Class1_Kannada_Poem1.mp3" 
+          },
+          poem6: {
+            pdf: "https://docs.google.com/gview?url=https://raw.githubusercontent.com/S-NR/StudentsGuide/main/poem_text/Class6_Kannada_SL_Poem6.pdf&embedded=true",
+            video: "https://www.youtube.com/embed/I9GycJgh8Ik",
+            audio: "poem_audio/Class1_Kannada_Poem1.mp3"
+          },
+          poem7: {
+            pdf: "https://docs.google.com/gview?url=https://raw.githubusercontent.com/S-NR/StudentsGuide/main/poem_text/Class6_Kannada_SL_Poem7.pdf&embedded=true",
+            video: "https://www.youtube.com/embed/b93YscNCThE",
+            audio: "poem_audio/Class1_Kannada_Poem1.mp3"
+          },
+        }
+      }
+    };
+
+    function getParam(key) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(key);
+    }
+
+    window.onload = function () {
+      const cls = getParam("class");
+      const subject = getParam("subject");
+      const poem = getParam("poem");
+
+      const data = contentMap?.[cls]?.[subject]?.[poem];
+
+      if (data) {
+        document.getElementById("poem-pdf").src = data.pdf;
+        document.getElementById("poem-pdf-link").href = data.pdf;
+        document.getElementById("poem-video").src = data.video;
+        document.getElementById("poem-audio-src").src = data.audio;
+        document.getElementById("poem-audio").load();
+      } else {
+        document.body.innerHTML = "<h2>Invalid or Missing Poem Selection</h2>";
+      }
+    };
+  </script>
+</body>
+</html>
