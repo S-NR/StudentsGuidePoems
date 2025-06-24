@@ -199,6 +199,19 @@
         alert("Please select Class, Subject, Lesson Type, and Content.");
       }
     }
+
+  window.onload = function () {
+  // Reset all dropdowns to default
+  document.getElementById("class").selectedIndex = 0;
+  document.getElementById("subject").selectedIndex = 0;
+
+  const lessonTypeSelect = document.getElementById("lessontype");
+  const contentSelect = document.getElementById("contentItem");
+
+  lessonTypeSelect.innerHTML = '<option value="">-- Choose Lesson Type --</option>';
+  contentSelect.innerHTML = '<option value="">-- Choose Content --</option>';
+};
+
   </script>
 </body>
 </html>
